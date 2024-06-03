@@ -35,7 +35,7 @@ public class ClassObjectDemo {
         System.out.println(l1);  // {Eg: org.gfg.demo.Lecture@3feba861}
 
         // Print the hash-code of the parent class of the object
-        // Same hash-code will be returned since l0 and l1 are objects of the same class
+        // Same hash-code will be returned since the getMentor() method returns the same String object "Sashi"
         System.out.println(l0.getMentor().hashCode());
         System.out.println(l1.getMentor().hashCode()); // same value as the previous line
     }
