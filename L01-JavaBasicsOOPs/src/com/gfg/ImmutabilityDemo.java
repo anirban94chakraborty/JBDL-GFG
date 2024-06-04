@@ -12,7 +12,7 @@ public class ImmutabilityDemo {
 
         // Both 'name' and 'name2' refer to the same String object with value "Sashi"
         System.out.println(name); // Sashi
-        System.out.println(name2); // Ravi
+        System.out.println(name2); // Sashi
 
         // 'name2' now refer to a new String object with value "Ravi"
         name2 = new String("Ravi");
