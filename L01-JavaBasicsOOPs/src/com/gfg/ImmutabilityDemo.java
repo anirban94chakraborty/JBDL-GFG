@@ -33,6 +33,8 @@ public class ImmutabilityDemo {
         emp1.getDoj().setTime(8950044); // Original Value is 'doj' of 'emp1' object is not modified
 
         System.out.println(emp1);
+
+        System.out.println(emp1.details); // Field with default scope can be accessed here (since same package)
     }
 
 }

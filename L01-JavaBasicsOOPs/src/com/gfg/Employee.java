@@ -8,6 +8,9 @@ public final class Employee {
     private final String name;
     private final Date doj;
 
+    // Field with default scope
+    String details;
+
     public Employee(String name, Date doj) {
         this.name = name;
         this.doj = new Date(doj.getTime()); // To make the doj value immutable
