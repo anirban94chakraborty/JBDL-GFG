@@ -1,4 +1,4 @@
-package com.gfg;
+package com.gfg.exceptions;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
