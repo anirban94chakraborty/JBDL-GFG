@@ -7,7 +7,7 @@ public class VisitorCounterTask implements Runnable{
 
     private AtomicInteger atomicCounter = new AtomicInteger();    // Alternative to using synchronized methods
 
-    private void increment() {  /* 'synchronized' can be used for avoiding race condition
+    private void increment() {  /* 'synchronized' can be used for avoiding race condition / memory inconsistency errors
                                     while incrementing the 'counter' value
                                  */
         counter++;
