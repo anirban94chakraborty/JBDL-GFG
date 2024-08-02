@@ -27,7 +27,11 @@ public class MmtSearchService {
         try {
             List<Future<List<FlightData>>> futureList = executorService.invokeAll(callableList);
             for(Future<List<FlightData>> future : futureList) {
-                response.addAll(future.get());
+                try {
+                    response.addAll(future.get(300, TimeUnit.MILLISECONDS));
+                } catch (TimeoutException e) {
+                    throw new RuntimeException(e);
+                }
             }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
