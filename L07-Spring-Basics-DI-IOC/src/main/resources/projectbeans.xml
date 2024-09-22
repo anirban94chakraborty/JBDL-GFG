@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="engine1" class="org.gfg.Engine"> <!-- Default Scope (Singleton) -->
+        <property name="name" value="new engine"></property> <!-- For Bean Creation using Setters -->
+        <property name="cc" value="1600"></property> <!-- For Bean Creation using Setters -->
+    </bean>
+
+
+    <bean id="engine2" class="org.gfg.Engine" scope="prototype"> <!-- Prototype Scope -->
+        <constructor-arg index="0" value="torq engine"/> <!-- For Bean Creation using Constructor -->
+        <constructor-arg index="1" value="1200"/> <!-- For Bean Creation using Constructor -->
+    </bean>
+
+    <bean id="engine3" class="org.gfg.Engine" init-method="engineInit" destroy-method="engineDestroy"> <!-- Executing methods during Bean Initialization & Bean Destruction -->
+        <property name="name" value="power engine"></property>
+        <property name="cc" value="1200"></property>
+    </bean>
+
+    <bean id="car1" class="org.gfg.Car">
+        <property name="name" value="Hexa"></property>
+        <property name="engine" ref="engine1"></property>
+    </bean>
+    
+</beans>
