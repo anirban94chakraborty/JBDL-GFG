@@ -52,6 +52,14 @@
 			<optional>true</optional>
 			<scope>compile</scope>
 		</dependency>
+
+		<!--Dependency of '06-KeywordAnalyzer' from local cache (.m2)-->
+		<dependency>
+			<groupId>org.gfg.keywords</groupId>
+			<artifactId>L06-KeywordAnalyzerMvn</artifactId>
+			<version>1.1-SNAPSHOT</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
