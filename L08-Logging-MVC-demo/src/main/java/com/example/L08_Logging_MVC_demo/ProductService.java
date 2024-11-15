@@ -3,6 +3,7 @@ package com.example.L08_Logging_MVC_demo;
 import jakarta.annotation.PostConstruct;
 import org.gfg.keywords.keywordanalyzer.KeywordAnalyzerInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class ProductService {
     private AtomicLong nextId = new AtomicLong(1l);
 
     @Autowired
+    //@Qualifier("keywordAnalyzerImpl") [Not mandatory as @Primary is already used with Bean declaration]
     private KeywordAnalyzerInterface keywordAnalyzer;
 
     @PostConstruct
