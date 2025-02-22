@@ -55,8 +55,13 @@ public class ProductDAOWithDB implements ProductDAOInterface {
     @Override
     public Product create(Product product) {
         Connection con = null;
+        boolean autoCommit = false;
         try {
             con = DriverManager.getConnection(dbUrl, username, password);
+
+            // Setting AutoCommit to false for Transaction Management
+            autoCommit = con.getAutoCommit();
+            con.setAutoCommit(false);
 
             // Using Non-Parameterized SQL Query for creating a new record
             // String sqlInsert = "INSERT INTO product VALUES (null, '" + product.getName() + "', " + product.getCost() + ");" ;
@@ -80,7 +85,16 @@ public class ProductDAOWithDB implements ProductDAOInterface {
             if(generatedKeys.next()) {
                 product.setId(generatedKeys.getLong(1));
             }
+
+            // Commit Transaction
+            con.commit();
         } catch (SQLException e) {
+            // Rollback Transaction
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             throw new RuntimeException(e);
         } finally {
             if(con != null) {
@@ -97,8 +111,12 @@ public class ProductDAOWithDB implements ProductDAOInterface {
     @Override
     public Product update(Long id, Product product) {
         Connection con = null;
+        boolean autoCommit = false;
         try {
             con = DriverManager.getConnection(dbUrl, username, password);
+            autoCommit = con.getAutoCommit();
+            con.setAutoCommit(false);
+
             String sqlUpdate = "UPDATE product SET name=?, cost=? WHERE id=?;";
             PreparedStatement preparedStatement = con.prepareStatement(sqlUpdate);
             preparedStatement.setString(1, product.getName());
@@ -112,8 +130,13 @@ public class ProductDAOWithDB implements ProductDAOInterface {
             }
             // Set product ID
             product.setId(id);
-
+            con.commit();
         } catch (SQLException e) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             throw new RuntimeException(e);
         } finally {
             if(con != null) {
@@ -131,8 +154,11 @@ public class ProductDAOWithDB implements ProductDAOInterface {
     public Product delete(Long id) {
         Connection con = null;
         Product product = null;
+        boolean autoCommit = false;
         try {
             con = DriverManager.getConnection(dbUrl, username, password);
+            autoCommit = con.getAutoCommit();
+            con.setAutoCommit(false);
 
             // Fetch record to be deleted from DB
             String sqlQuery = "SELECT name, cost FROM product WHERE id=?;";
@@ -163,7 +189,14 @@ public class ProductDAOWithDB implements ProductDAOInterface {
                 throw new SQLException("Delete Failed");
             }
 
+            con.commit();
+
         } catch (SQLException e) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             throw new RuntimeException(e);
         } finally {
             if(con != null) {
