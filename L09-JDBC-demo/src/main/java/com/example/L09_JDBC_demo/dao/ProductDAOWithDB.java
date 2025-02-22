@@ -99,6 +99,7 @@ public class ProductDAOWithDB implements ProductDAOInterface {
         } finally {
             if(con != null) {
                 try {
+                    con.setAutoCommit(autoCommit);
                     con.close();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -141,6 +142,7 @@ public class ProductDAOWithDB implements ProductDAOInterface {
         } finally {
             if(con != null) {
                 try {
+                    con.setAutoCommit(autoCommit);
                     con.close();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -201,6 +203,7 @@ public class ProductDAOWithDB implements ProductDAOInterface {
         } finally {
             if(con != null) {
                 try {
+                    con.setAutoCommit(autoCommit);
                     con.close();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
